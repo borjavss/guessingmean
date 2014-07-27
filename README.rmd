@@ -1,0 +1,71 @@
+---
+title: "Guessing mean velocities expansion game!"
+author: "Developing Data Products Course Project"
+date: "27 Jul 2014"
+output: html_document
+---
+
+This is an game! :D
+Your goal is to guess the expansion velocity of the galaxies.
+
+### Data
+The data used in this game comes from MASS library of R package.
+The data is a vector of velocities in km/sec of 82 galaxies from 6 well-separated conic sections of an unfilled survey of the Corona Borealis region.
+```{r data1}
+library(MASS); data(galaxies); str(galaxies)
+```
+
+You can get more information typing the next chunk in R:
+```{r data2}
+help(galaxies)
+```
+### How can I play?
+It's really simple. Yo should to use the side bar in left region of the screen in order to **guess the mean expansion velocity** of the galaxies given in mentioned data.
+
+### How I know if I get good results?
+Well, you can use:
+
+- Data histogram (try to get the solution with only this graphic)
+- Given values of
+      - Difference between your value and real value
+      - RMSE root mean square error commited
+- Data set graphic information
+
+```{r graph}
+par(mfrow=c(1,2))
+hist(galaxies, xlab='velocity (km/sec)', col='orange',
+     main='Histogram respresentation', cex.lab=1.1, cex.main=1.2)
+lines(c(mean(galaxies),mean(galaxies)), c(0, 46), col="green",lwd=5)
+plot(galaxies, ylab='Velocity (km/sec)', xlab="Each one of the given galaxies in data set",
+     col="orange", pch=8, lwd=3, main='Data set representation', cex.lab=1.1, cex.main=1.2)
+lines(x=c(0,length(galaxies)),y=c(mean(galaxies),mean(galaxies)), col="green",lwd=5)
+```
+
+NOTE: solution is represented by green line in each of previous graphs. During the game, your selected MU will be showed in red color.
+
+
+> Remember, you want to minimize RMSE value ;)
+
+### How does it work?
+It's simple. You enter a value through slider bar, this will be your MU value (NOTE: MU is your try mean value).
+Then, app plot your given value in the histrogram giving you:
+
+- DIFFERENCE: The difference between your value (MU) and the real value (the solution)
+- RMSE: The RMSE root mean square error comminted in your MU selection.
+
+#### How app calculate this values?
+
+- Difference is calculated by: $DIFFERENCE = MU - mean(galaxies)$
+- RMSE is calculated by: $RMSE = sqrt(mean((galaxies - mu)^2))$
+
+> Do not worry about calculation, just try it!!! :D
+
+### What is the goal of the game?
+
+You should to reduce DIFFERENCE and RMSE. So, best value in both cases will be 0.
+
+ -It is really hard to get it with the slide bar :D
+
+> That's the game ;) :D
+
+### I hope you enjoy it!
