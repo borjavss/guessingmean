@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Guessing velocity mean game!!! by borjavss</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Guessing velocity mean game!!!</h1>
+        <h2>Guess what is the mean velocity of the galaxies! :D</h2>
+        <a href="https://github.com/borjavss/guessingmean" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <hr><p>title: "Guessing mean velocities expansion game!"
+author: "Developing Data Products Course Project"
+date: "27 Jul 2014"</p>
+
+<h2>
+<a name="output-html_document" class="anchor" href="#output-html_document"><span class="octicon octicon-link"></span></a>output: html_document</h2>
+
+<p>This is an game! :D
+Your goal is to guess the expansion velocity of the galaxies.</p>
+
+<h3>
+<a name="data" class="anchor" href="#data"><span class="octicon octicon-link"></span></a>Data</h3>
+
+<p>The data used in this game comes from MASS library of R package.
+The data is a vector of velocities in km/sec of 82 galaxies from 6 well-separated conic sections of an unfilled survey of the Corona Borealis region.</p>
+
+<div class="highlight highlight-r"><pre><span class="kn">library</span><span class="p">(</span>MASS<span class="p">);</span> data<span class="p">(</span>galaxies<span class="p">);</span> str<span class="p">(</span>galaxies<span class="p">)</span>
+</pre></div>
+
+<p>You can get more information typing the next chunk in R:</p>
+
+<div class="highlight highlight-r"><pre>help<span class="p">(</span>galaxies<span class="p">)</span>
+</pre></div>
+
+<h3>
+<a name="how-can-i-play" class="anchor" href="#how-can-i-play"><span class="octicon octicon-link"></span></a>How can I play?</h3>
+
+<p>It's really simple. Yo should to use the side bar in left region of the screen in order to <strong>guess the mean expansion velocity</strong> of the galaxies given in mentioned data.</p>
+
+<h3>
+<a name="how-i-know-if-i-get-good-results" class="anchor" href="#how-i-know-if-i-get-good-results"><span class="octicon octicon-link"></span></a>How I know if I get good results?</h3>
+
+<p>Well, you can use:</p>
+
+<ul>
+<li>Data histogram (try to get the solution with only this graphic)</li>
+<li>Given values of
+
+<ul>
+<li>Difference between your value and real value</li>
+<li>RMSE root mean square error commited</li>
+</ul>
+</li>
+<li>Data set graphic information</li>
+</ul><div class="highlight highlight-r"><pre>par<span class="p">(</span>mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
+hist<span class="p">(</span>galaxies<span class="p">,</span> xlab<span class="o">=</span><span class="s">'velocity (km/sec)'</span><span class="p">,</span> col<span class="o">=</span><span class="s">'orange'</span><span class="p">,</span>
+     main<span class="o">=</span><span class="s">'Histogram respresentation'</span><span class="p">,</span> cex.lab<span class="o">=</span><span class="m">1.1</span><span class="p">,</span> cex.main<span class="o">=</span><span class="m">1.2</span><span class="p">)</span>
+lines<span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="kp">mean</span><span class="p">(</span>galaxies<span class="p">),</span><span class="kp">mean</span><span class="p">(</span>galaxies<span class="p">)),</span> <span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">46</span><span class="p">),</span> col<span class="o">=</span><span class="s">"green"</span><span class="p">,</span>lwd<span class="o">=</span><span class="m">5</span><span class="p">)</span>
+plot<span class="p">(</span>galaxies<span class="p">,</span> ylab<span class="o">=</span><span class="s">'Velocity (km/sec)'</span><span class="p">,</span> xlab<span class="o">=</span><span class="s">"Each one of the given galaxies in data set"</span><span class="p">,</span>
+     col<span class="o">=</span><span class="s">"orange"</span><span class="p">,</span> pch<span class="o">=</span><span class="m">8</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">3</span><span class="p">,</span> main<span class="o">=</span><span class="s">'Data set representation'</span><span class="p">,</span> cex.lab<span class="o">=</span><span class="m">1.1</span><span class="p">,</span> cex.main<span class="o">=</span><span class="m">1.2</span><span class="p">)</span>
+lines<span class="p">(</span>x<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="kp">length</span><span class="p">(</span>galaxies<span class="p">)),</span>y<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="kp">mean</span><span class="p">(</span>galaxies<span class="p">),</span><span class="kp">mean</span><span class="p">(</span>galaxies<span class="p">)),</span> col<span class="o">=</span><span class="s">"green"</span><span class="p">,</span>lwd<span class="o">=</span><span class="m">5</span><span class="p">)</span>
+</pre></div>
+
+<p><img src="https://cloud.githubusercontent.com/assets/4093468/3714168/452c9650-1598-11e4-8495-5e09674d05fa.jpeg" alt="rplot"></p>
+
+<p>NOTE: solution is represented by green line in each of previous graphs. During the game, your selected MU will be showed in red color.</p>
+
+<blockquote>
+<p>Remember, you want to minimize RMSE value ;)</p>
+</blockquote>
+
+<h3>
+<a name="how-does-it-work" class="anchor" href="#how-does-it-work"><span class="octicon octicon-link"></span></a>How does it work?</h3>
+
+<p>It's simple. You enter a value through slider bar, this will be your MU value (NOTE: MU is your try mean value).
+Then, app plot your given value in the histrogram giving you:</p>
+
+<ul>
+<li>DIFFERENCE: The difference between your value (MU) and the real value (the solution)</li>
+<li>RMSE: The RMSE root mean square error comminted in your MU selection.</li>
+</ul><h4>
+<a name="how-app-calculate-this-values" class="anchor" href="#how-app-calculate-this-values"><span class="octicon octicon-link"></span></a>How app calculate this values?</h4>
+
+<ul>
+<li>Difference is calculated by: $DIFFERENCE = MU - mean(galaxies)$</li>
+<li>RMSE is calculated by: $RMSE = sqrt(mean((galaxies - mu)^2))$</li>
+</ul><blockquote>
+<p>Do not worry about calculation, just try it!!! :D</p>
+</blockquote>
+
+<h3>
+<a name="what-is-the-goal-of-the-game" class="anchor" href="#what-is-the-goal-of-the-game"><span class="octicon octicon-link"></span></a>What is the goal of the game?</h3>
+
+<p>You should to reduce DIFFERENCE and RMSE. So, best value in both cases will be 0.</p>
+
+<p>-It is really hard to get it with the slide bar :D</p>
+
+<blockquote>
+<p>That's the game ;) :D</p>
+</blockquote>
+
+<h3>
+<a name="i-hope-you-enjoy-it" class="anchor" href="#i-hope-you-enjoy-it"><span class="octicon octicon-link"></span></a>I hope you enjoy it!</h3>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/borjavss/guessingmean/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/borjavss/guessingmean/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/borjavss/guessingmean"></a> is maintained by <a href="https://github.com/borjavss">borjavss</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
